@@ -1,0 +1,526 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ShopVerse - Online Store</title>
+    
+    <link rel="stylesheet" href="css/style.css" />
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet"
+    />
+</head>
+<body>
+    <!-- ===== NAVBAR ===== -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="nav-brand">
+                <i class="fas fa-store"></i>
+                <span>ShopVerse</span>
+            </a>
+
+            <form class="nav-search" method="GET" action="index.html">
+                <input type="text" name="search" placeholder="Search products..." />
+                <button type="submit"><i class="fas fa-search"></i></button>
+            </form>
+
+            <div class="nav-actions">
+                <div class="user-profile">
+                    <div class="user-menu" id="userMenu">
+                        <button class="user-avatar" id="userAvatarBtn">
+                            <img src="https://ui-avatars.com/api/?name=John+Doe&background=6c63ff&color=fff&size=128&bold=true" alt="User" />
+                            <span id="userNameDisplay">John</span>
+                            <i class="fas fa-chevron-down"></i>
+                        </button>
+                        <div class="user-dropdown" id="userDropdown">
+                            <div class="dropdown-header">
+                                <img src="https://ui-avatars.com/api/?name=John+Doe&background=6c63ff&color=fff&size=128&bold=true" alt="User" />
+                                <div>
+                                    <div id="dropdownName">John Doe</div>
+                                    <div id="dropdownEmail">john@email.com</div>
+                                </div>
+                            </div>
+                            <a href="#" class="dropdown-item"><i class="fas fa-user"></i> My Profile</a>
+                            <a href="#" class="dropdown-item"><i class="fas fa-shopping-bag"></i> My Orders</a>
+                            <a href="#" class="dropdown-item"><i class="fas fa-heart"></i> Wishlist</a>
+                            <a href="#" class="dropdown-item"><i class="fas fa-cog"></i> Settings</a>
+                            <hr />
+                            <a href="#" class="dropdown-item logout" id="logoutBtn">
+                                <i class="fas fa-sign-out-alt"></i> Logout
+                            </a>
+                        </div>
+                    </div>
+                    <a href="login.html" class="nav-btn" id="loginBtn" title="Login">
+                        <i class="fas fa-user"></i>
+                    </a>
+                </div>
+
+                <button class="nav-btn" id="cartToggle">
+                    <i class="fas fa-shopping-cart"></i>
+                    <span class="cart-badge" id="cartCount">0</span>
+                </button>
+                <button class="nav-btn" id="themeToggle">
+                    <i class="fas fa-moon"></i>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- ===== HERO ===== -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Discover Amazing Deals</h1>
+            <p>Premium products at unbeatable prices. Shop the latest trends now!</p>
+            <a href="#productsSection" class="btn-primary">
+                <i class="fas fa-rocket"></i> Shop Now
+            </a>
+        </div>
+        <div class="hero-stats">
+            <div class="stat-item">
+                <span class="stat-number">10K+</span>
+                <span class="stat-label">Happy Customers</span>
+            </div>
+            <div class="stat-item">
+                <span class="stat-number">500+</span>
+                <span class="stat-label">Products</span>
+            </div>
+            <div class="stat-item">
+                <span class="stat-number">4.9★</span>
+                <span class="stat-label">Average Rating</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== CATEGORIES ===== -->
+    <section class="categories">
+        <div class="container">
+            <h2><i class="fas fa-tags"></i> Categories</h2>
+            <div class="category-filters">
+                <a href="index.html" class="category-btn active">All</a>
+                <a href="index.html?category=electronics" class="category-btn">
+                    <i class="fas fa-laptop"></i> Electronics
+                </a>
+                <a href="index.html?category=clothing" class="category-btn">
+                    <i class="fas fa-tshirt"></i> Clothing
+                </a>
+                <a href="index.html?category=books" class="category-btn">
+                    <i class="fas fa-book"></i> Books
+                </a>
+                <a href="index.html?category=home" class="category-btn">
+                    <i class="fas fa-couch"></i> Home & Living
+                </a>
+                <a href="index.html?category=toys" class="category-btn">
+                    <i class="fas fa-gamepad"></i> Toys
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== PRODUCTS ===== -->
+    <section class="products" id="productsSection">
+        <div class="container">
+            <div class="products-header">
+                <h2><i class="fas fa-grid-2"></i> All Products</h2>
+                <div class="sort-options">
+                    <form method="GET" action="index.html">
+                        <input type="hidden" name="category" />
+                        <input type="hidden" name="search" />
+                        <label for="sortSelect">Sort by:</label>
+                        <select id="sortSelect" name="sort" onchange="this.form.submit()">
+                            <option value="featured">Featured</option>
+                            <option value="price-low">Price: Low to High</option>
+                            <option value="price-high">Price: High to Low</option>
+                            <option value="rating">Top Rated</option>
+                        </select>
+                    </form>
+                </div>
+            </div>
+
+            <div class="product-grid">
+                <!-- Product 1 -->
+                <div class="product-card" data-id="1">
+                    <a href="product-detail.html?id=1" class="product-link">
+                        <div class="product-image">
+                            <i class="fas fa-headphones"></i>
+                            <span class="product-badge">Best Seller</span>
+                            <span class="product-rating"><i class="fas fa-star"></i> 4.8 (1,247)</span>
+                        </div>
+                        <div class="product-body">
+                            <div class="product-category">Electronics</div>
+                            <div class="product-title">Wireless Bluetooth Headphones Pro</div>
+                            <div class="product-price">$89.99</div>
+                        </div>
+                    </a>
+                    <div class="product-actions">
+                        <button class="btn-add" data-id="1">
+                            <i class="fas fa-plus"></i> Add to Cart
+                        </button>
+                        <button class="btn-wishlist" data-id="1">
+                            <i class="fas fa-heart"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Product 2 -->
+                <div class="product-card" data-id="2">
+                    <a href="product-detail.html?id=2" class="product-link">
+                        <div class="product-image">
+                            <i class="fas fa-clock"></i>
+                            <span class="product-rating"><i class="fas fa-star"></i> 4.6 (856)</span>
+                        </div>
+                        <div class="product-body">
+                            <div class="product-category">Electronics</div>
+                            <div class="product-title">Smart Fitness Tracker Watch</div>
+                            <div class="product-price">$149.99</div>
+                        </div>
+                    </a>
+                    <div class="product-actions">
+                        <button class="btn-add" data-id="2">
+                            <i class="fas fa-plus"></i> Add to Cart
+                        </button>
+                        <button class="btn-wishlist" data-id="2">
+                            <i class="fas fa-heart"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Product 3 -->
+                <div class="product-card" data-id="3">
+                    <a href="product-detail.html?id=3" class="product-link">
+                        <div class="product-image">
+                            <i class="fas fa-tshirt"></i>
+                            <span class="product-badge" style="background:#28a745;">Sale</span>
+                            <span class="product-rating"><i class="fas fa-star"></i> 4.4 (632)</span>
+                        </div>
+                        <div class="product-body">
+                            <div class="product-category">Clothing</div>
+                            <div class="product-title">Premium Cotton T-Shirt (Pack of 3)</div>
+                            <div class="product-price">
+                                $39.99
+                                <span class="original">$59.99</span>
+                            </div>
+                        </div>
+                    </a>
+                    <div class="product-actions">
+                        <button class="btn-add" data-id="3">
+                            <i class="fas fa-plus"></i> Add to Cart
+                        </button>
+                        <button class="btn-wishlist" data-id="3">
+                            <i class="fas fa-heart"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Product 4 -->
+                <div class="product-card" data-id="4">
+                    <a href="product-detail.html?id=4" class="product-link">
+                        <div class="product-image">
+                            <i class="fas fa-book"></i>
+                            <span class="product-badge" style="background:#ffd93d;color:#1a1a2e;">Top Rated</span>
+                            <span class="product-rating"><i class="fas fa-star"></i> 4.9 (423)</span>
+                        </div>
+                        <div class="product-body">
+                            <div class="product-category">Books</div>
+                            <div class="product-title">The Art of Coding - Book</div>
+                            <div class="product-price">$29.99</div>
+                        </div>
+                    </a>
+                    <div class="product-actions">
+                        <button class="btn-add" data-id="4">
+                            <i class="fas fa-plus"></i> Add to Cart
+                        </button>
+                        <button class="btn-wishlist" data-id="4">
+                            <i class="fas fa-heart"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Product 5 -->
+                <div class="product-card" data-id="5">
+                    <a href="product-detail.html?id=5" class="product-link">
+                        <div class="product-image">
+                            <i class="fas fa-lightbulb"></i>
+                            <span class="product-rating"><i class="fas fa-star"></i> 4.3 (289)</span>
+                        </div>
+                        <div class="product-body">
+                            <div class="product-category">Home & Living</div>
+                            <div class="product-title">Modern LED Desk Lamp</div>
+                            <div class="product-price">$45.99</div>
+                        </div>
+                    </a>
+                    <div class="product-actions">
+                        <button class="btn-add" data-id="5">
+                            <i class="fas fa-plus"></i> Add to Cart
+                        </button>
+                        <button class="btn-wishlist" data-id="5">
+                            <i class="fas fa-heart"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Product 6 -->
+                <div class="product-card" data-id="6">
+                    <a href="product-detail.html?id=6" class="product-link">
+                        <div class="product-image">
+                            <i class="fas fa-cubes"></i>
+                            <span class="product-badge" style="background:#17a2b8;">Eco-Friendly</span>
+                            <span class="product-rating"><i class="fas fa-star"></i> 4.7 (567)</span>
+                        </div>
+                        <div class="product-body">
+                            <div class="product-category">Toys</div>
+                            <div class="product-title">Wooden Building Blocks Set</div>
+                            <div class="product-price">$34.99</div>
+                        </div>
+                    </a>
+                    <div class="product-actions">
+                        <button class="btn-add" data-id="6">
+                            <i class="fas fa-plus"></i> Add to Cart
+                        </button>
+                        <button class="btn-wishlist" data-id="6">
+                            <i class="fas fa-heart"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Product 7 -->
+                <div class="product-card" data-id="7">
+                    <a href="product-detail.html?id=7" class="product-link">
+                        <div class="product-image">
+                            <i class="fas fa-camera"></i>
+                            <span class="product-badge" style="background:#ff6b6b;">Deal</span>
+                            <span class="product-rating"><i class="fas fa-star"></i> 4.5 (734)</span>
+                        </div>
+                        <div class="product-body">
+                            <div class="product-category">Electronics</div>
+                            <div class="product-title">4K Action Camera with Stabilizer</div>
+                            <div class="product-price">
+                                $199.99
+                                <span class="original">$279.99</span>
+                            </div>
+                        </div>
+                    </a>
+                    <div class="product-actions">
+                        <button class="btn-add" data-id="7">
+                            <i class="fas fa-plus"></i> Add to Cart
+                        </button>
+                        <button class="btn-wishlist" data-id="7">
+                            <i class="fas fa-heart"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Product 8 -->
+                <div class="product-card" data-id="8">
+                    <a href="product-detail.html?id=8" class="product-link">
+                        <div class="product-image">
+                            <i class="fas fa-vest"></i>
+                            <span class="product-rating"><i class="fas fa-star"></i> 4.2 (398)</span>
+                        </div>
+                        <div class="product-body">
+                            <div class="product-category">Clothing</div>
+                            <div class="product-title">Classic Denim Jacket</div>
+                            <div class="product-price">$79.99</div>
+                        </div>
+                    </a>
+                    <div class="product-actions">
+                        <button class="btn-add" data-id="8">
+                            <i class="fas fa-plus"></i> Add to Cart
+                        </button>
+                        <button class="btn-wishlist" data-id="8">
+                            <i class="fas fa-heart"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Product 9 -->
+                <div class="product-card" data-id="9">
+                    <a href="product-detail.html?id=9" class="product-link">
+                        <div class="product-image">
+                            <i class="fas fa-code"></i>
+                            <span class="product-badge" style="background:#6c63ff;">Bestseller</span>
+                            <span class="product-rating"><i class="fas fa-star"></i> 4.8 (512)</span>
+                        </div>
+                        <div class="product-body">
+                            <div class="product-category">Books</div>
+                            <div class="product-title">The Python Mastery - Book</div>
+                            <div class="product-price">$39.99</div>
+                        </div>
+                    </a>
+                    <div class="product-actions">
+                        <button class="btn-add" data-id="9">
+                            <i class="fas fa-plus"></i> Add to Cart
+                        </button>
+                        <button class="btn-wishlist" data-id="9">
+                            <i class="fas fa-heart"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Product 10 -->
+                <div class="product-card" data-id="10">
+                    <a href="product-detail.html?id=10" class="product-link">
+                        <div class="product-image">
+                            <i class="fas fa-video"></i>
+                            <span class="product-rating"><i class="fas fa-star"></i> 4.4 (445)</span>
+                        </div>
+                        <div class="product-body">
+                            <div class="product-category">Electronics</div>
+                            <div class="product-title">Smart Home Security Camera</div>
+                            <div class="product-price">$129.99</div>
+                        </div>
+                    </a>
+                    <div class="product-actions">
+                        <button class="btn-add" data-id="10">
+                            <i class="fas fa-plus"></i> Add to Cart
+                        </button>
+                        <button class="btn-wishlist" data-id="10">
+                            <i class="fas fa-heart"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Product 11 -->
+                <div class="product-card" data-id="11">
+                    <a href="product-detail.html?id=11" class="product-link">
+                        <div class="product-image">
+                            <i class="fas fa-bed"></i>
+                            <span class="product-badge" style="background:#28a745;">Sale</span>
+                            <span class="product-rating"><i class="fas fa-star"></i> 4.6 (321)</span>
+                        </div>
+                        <div class="product-body">
+                            <div class="product-category">Home & Living</div>
+                            <div class="product-title">Cozy Throw Blanket - Premium</div>
+                            <div class="product-price">
+                                $49.99
+                                <span class="original">$69.99</span>
+                            </div>
+                        </div>
+                    </a>
+                    <div class="product-actions">
+                        <button class="btn-add" data-id="11">
+                            <i class="fas fa-plus"></i> Add to Cart
+                        </button>
+                        <button class="btn-wishlist" data-id="11">
+                            <i class="fas fa-heart"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Product 12 -->
+                <div class="product-card" data-id="12">
+                    <a href="product-detail.html?id=12" class="product-link">
+                        <div class="product-image">
+                            <i class="fas fa-robot"></i>
+                            <span class="product-badge" style="background:#ff6b6b;">Popular</span>
+                            <span class="product-rating"><i class="fas fa-star"></i> 4.9 (678)</span>
+                        </div>
+                        <div class="product-body">
+                            <div class="product-category">Toys</div>
+                            <div class="product-title">STEM Robot Building Kit</div>
+                            <div class="product-price">$59.99</div>
+                        </div>
+                    </a>
+                    <div class="product-actions">
+                        <button class="btn-add" data-id="12">
+                            <i class="fas fa-plus"></i> Add to Cart
+                        </button>
+                        <button class="btn-wishlist" data-id="12">
+                            <i class="fas fa-heart"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== SHOPPING CART ===== -->
+    <div class="cart-overlay" id="cartOverlay"></div>
+    <aside class="cart-sidebar" id="cartSidebar">
+        <div class="cart-header">
+            <h3><i class="fas fa-shopping-bag"></i> Your Cart</h3>
+            <button class="close-cart" id="closeCart"><i class="fas fa-times"></i></button>
+        </div>
+        <div class="cart-items" id="cartItems">
+            <div class="empty-cart">
+                <i class="fas fa-shopping-cart"></i>
+                <p>Your cart is empty</p>
+                <span>Start shopping now!</span>
+            </div>
+        </div>
+        <div class="cart-footer">
+            <div class="cart-total">
+                <span>Total:</span>
+                <strong id="cartTotal">$0.00</strong>
+            </div>
+            <button class="btn-checkout" id="checkoutBtn">
+                <i class="fas fa-lock"></i> Proceed to Checkout
+            </button>
+        </div>
+    </aside>
+
+    <!-- ===== CHECKOUT MODAL ===== -->
+    <div class="modal-overlay" id="checkoutModal">
+        <div class="modal">
+            <button class="modal-close" id="closeModal"><i class="fas fa-times"></i></button>
+            <div class="modal-content">
+                <i class="fas fa-check-circle success-icon"></i>
+                <h2>Order Placed Successfully!</h2>
+                <p>Thank you for your purchase. Your order has been confirmed.</p>
+                <div class="order-summary" id="orderSummary"></div>
+                <button class="btn-primary" id="continueShopping">Continue Shopping</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ===== TOAST ===== -->
+    <div class="toast" id="toast"></div>
+
+    <!-- ===== FOOTER ===== -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h4><i class="fas fa-store"></i> ShopVerse</h4>
+                <p>Your one-stop shop for quality products at great prices.</p>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-facebook"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-youtube"></i></a>
+                </div>
+            </div>
+            <div class="footer-section">
+                <h4>Quick Links</h4>
+                <a href="#">About Us</a>
+                <a href="#">Contact</a>
+                <a href="#">FAQ</a>
+                <a href="#">Returns</a>
+            </div>
+            <div class="footer-section">
+                <h4>Categories</h4>
+                <a href="#">Electronics</a>
+                <a href="#">Clothing</a>
+                <a href="#">Books</a>
+                <a href="#">Home & Living</a>
+            </div>
+            <div class="footer-section">
+                <h4>Newsletter</h4>
+                <p>Subscribe for exclusive deals!</p>
+                <div class="newsletter-form">
+                    <input type="email" placeholder="Your email" />
+                    <button><i class="fas fa-paper-plane"></i></button>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 ShopVerse. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+</body>
+</html>

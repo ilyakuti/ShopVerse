@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Product Detail - ShopVerse</title>
+    
+    <link rel="stylesheet" href="css/style.css" />
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet"
+    />
+</head>
+<body>
+    <!-- ===== NAVBAR ===== -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="nav-brand">
+                <i class="fas fa-store"></i>
+                <span>ShopVerse</span>
+            </a>
+
+            <form class="nav-search" method="GET" action="index.html">
+                <input type="text" name="search" placeholder="Search products..." />
+                <button type="submit"><i class="fas fa-search"></i></button>
+            </form>
+
+            <div class="nav-actions">
+                <div class="user-profile">
+                    <div class="user-menu" id="userMenu">
+                        <button class="user-avatar" id="userAvatarBtn">
+                            <img src="https://ui-avatars.com/api/?name=John+Doe&background=6c63ff&color=fff&size=128&bold=true" alt="User" />
+                            <span id="userNameDisplay">John</span>
+                            <i class="fas fa-chevron-down"></i>
+                        </button>
+                        <div class="user-dropdown" id="userDropdown">
+                            <div class="dropdown-header">
+                                <img src="https://ui-avatars.com/api/?name=John+Doe&background=6c63ff&color=fff&size=128&bold=true" alt="User" />
+                                <div>
+                                    <div id="dropdownName">John Doe</div>
+                                    <div id="dropdownEmail">john@email.com</div>
+                                </div>
+                            </div>
+                            <a href="#" class="dropdown-item"><i class="fas fa-user"></i> My Profile</a>
+                            <a href="#" class="dropdown-item"><i class="fas fa-shopping-bag"></i> My Orders</a>
+                            <a href="#" class="dropdown-item"><i class="fas fa-heart"></i> Wishlist</a>
+                            <a href="#" class="dropdown-item"><i class="fas fa-cog"></i> Settings</a>
+                            <hr />
+                            <a href="#" class="dropdown-item logout" id="logoutBtn">
+                                <i class="fas fa-sign-out-alt"></i> Logout
+                            </a>
+                        </div>
+                    </div>
+                    <a href="login.html" class="nav-btn" id="loginBtn" title="Login">
+                        <i class="fas fa-user"></i>
+                    </a>
+                </div>
+
+                <button class="nav-btn" id="cartToggle">
+                    <i class="fas fa-shopping-cart"></i>
+                    <span class="cart-badge" id="cartCount">0</span>
+                </button>
+                <button class="nav-btn" id="themeToggle">
+                    <i class="fas fa-moon"></i>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- ===== PRODUCT DETAIL ===== -->
+    <section class="detail-page">
+        <div class="container">
+            <div class="detail-breadcrumb">
+                <a href="index.html"><i class="fas fa-home"></i> Home</a>
+                <span>/</span>
+                <span>Products</span>
+                <span>/</span>
+                <span id="breadcrumbName">Product Detail</span>
+            </div>
+
+            <div class="detail-content">
+                <div class="detail-main">
+                    <div class="detail-image-section">
+                        <div class="detail-image">
+                            <i class="fas fa-headphones"></i>
+                            <span class="detail-badge">Best Seller</span>
+                        </div>
+                    </div>
+
+                    <div class="detail-info-section">
+                        <span class="detail-category">Electronics</span>
+                        <h1>Wireless Bluetooth Headphones Pro</h1>
+                        
+                        <div class="detail-rating">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <span>4.8 (1,247 reviews)</span>
+                        </div>
+                        
+                        <div class="detail-price">
+                            $89.99
+                            <span class="original"></span>
+                        </div>
+                        
+                        <p class="detail-description">
+                            Experience premium sound quality with our wireless Bluetooth headphones. 
+                            Features active noise cancellation, 40-hour battery life, and ultra-comfortable 
+                            ear cushions. Perfect for music lovers, gamers, and professionals.
+                        </p>
+
+                        <div class="detail-specs">
+                            <h4>Specifications</h4>
+                            <div class="specs-grid">
+                                <div class="spec-item">
+                                    <span class="label">Brand</span>
+                                    <span class="value">AudioTech</span>
+                                </div>
+                                <div class="spec-item">
+                                    <span class="label">Model</span>
+                                    <span class="value">ATH-PRO</span>
+                                </div>
+                                <div class="spec-item">
+                                    <span class="label">Battery</span>
+                                    <span class="value">40 hours</span>
+                                </div>
+                                <div class="spec-item">
+                                    <span class="label">Connectivity</span>
+                                    <span class="value">Bluetooth 5.2</span>
+                                </div>
+                                <div class="spec-item">
+                                    <span class="label">Weight</span>
+                                    <span class="value">250g</span>
+                                </div>
+                                <div class="spec-item">
+                                    <span class="label">Warranty</span>
+                                    <span class="value">2 Years</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="detail-actions">
+                            <button class="btn-add" data-id="1">
+                                <i class="fas fa-plus"></i> Add to Cart
+                            </button>
+                            <button class="btn-wishlist" data-id="1">
+                                <i class="fas fa-heart"></i>
+                            </button>
+                        </div>
+
+                        <a href="index.html" class="detail-back-link">
+                            <i class="fas fa-arrow-left"></i> Back to Shop
+                        </a>
+                    </div>
+                </div>
+
+                <div class="related-products">
+                    <h3><i class="fas fa-layer-group"></i> You Might Also Like</h3>
+                    <div class="related-grid">
+                        <a href="product-detail.html?id=2" class="related-item">
+                            <div class="related-icon"><i class="fas fa-clock"></i></div>
+                            <div class="related-name">Smart Fitness Tracker Watch</div>
+                            <div class="related-price">$149.99</div>
+                        </a>
+                        <a href="product-detail.html?id=4" class="related-item">
+                            <div class="related-icon"><i class="fas fa-book"></i></div>
+                            <div class="related-name">The Art of Coding - Book</div>
+                            <div class="related-price">$29.99</div>
+                        </a>
+                        <a href="product-detail.html?id=7" class="related-item">
+                            <div class="related-icon"><i class="fas fa-camera"></i></div>
+                            <div class="related-name">4K Action Camera with Stabilizer</div>
+                            <div class="related-price">$199.99</div>
+                        </a>
+                        <a href="product-detail.html?id=12" class="related-item">
+                            <div class="related-icon"><i class="fas fa-robot"></i></div>
+                            <div class="related-name">STEM Robot Building Kit</div>
+                            <div class="related-price">$59.99</div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== SHOPPING CART ===== -->
+    <div class="cart-overlay" id="cartOverlay"></div>
+    <aside class="cart-sidebar" id="cartSidebar">
+        <div class="cart-header">
+            <h3><i class="fas fa-shopping-bag"></i> Your Cart</h3>
+            <button class="close-cart" id="closeCart"><i class="fas fa-times"></i></button>
+        </div>
+        <div class="cart-items" id="cartItems">
+            <div class="empty-cart">
+                <i class="fas fa-shopping-cart"></i>
+                <p>Your cart is empty</p>
+                <span>Start shopping now!</span>
+            </div>
+        </div>
+        <div class="cart-footer">
+            <div class="cart-total">
+                <span>Total:</span>
+                <strong id="cartTotal">$0.00</strong>
+            </div>
+            <button class="btn-checkout" id="checkoutBtn">
+                <i class="fas fa-lock"></i> Proceed to Checkout
+            </button>
+        </div>
+    </aside>
+
+    <!-- ===== CHECKOUT MODAL ===== -->
+    <div class="modal-overlay" id="checkoutModal">
+        <div class="modal">
+            <button class="modal-close" id="closeModal"><i class="fas fa-times"></i></button>
+            <div class="modal-content">
+                <i class="fas fa-check-circle success-icon"></i>
+                <h2>Order Placed Successfully!</h2>
+                <p>Thank you for your purchase. Your order has been confirmed.</p>
+                <div class="order-summary" id="orderSummary"></div>
+                <button class="btn-primary" id="continueShopping">Continue Shopping</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ===== TOAST ===== -->
+    <div class="toast" id="toast"></div>
+
+    <!-- ===== FOOTER ===== -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h4><i class="fas fa-store"></i> ShopVerse</h4>
+                <p>Your one-stop shop for quality products at great prices.</p>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-facebook"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-youtube"></i></a>
+                </div>
+            </div>
+            <div class="footer-section">
+                <h4>Quick Links</h4>
+                <a href="#">About Us</a>
+                <a href="#">Contact</a>
+                <a href="#">FAQ</a>
+                <a href="#">Returns</a>
+            </div>
+            <div class="footer-section">
+                <h4>Categories</h4>
+                <a href="#">Electronics</a>
+                <a href="#">Clothing</a>
+                <a href="#">Books</a>
+                <a href="#">Home & Living</a>
+            </div>
+            <div class="footer-section">
+                <h4>Newsletter</h4>
+                <p>Subscribe for exclusive deals!</p>
+                <div class="newsletter-form">
+                    <input type="email" placeholder="Your email" />
+                    <button><i class="fas fa-paper-plane"></i></button>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 ShopVerse. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="js/detail.js"></script>
+</body>
+</html>
