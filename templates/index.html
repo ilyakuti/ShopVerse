@@ -127,7 +127,7 @@
                 <div class="product-card" data-id="1">
                     <a href="{% url "detail_page_url" product.id %}" class="product-link">
                         <div class="product-image">
-                            <i class="fas fa-headphones"></i>
+                            <img src="{{ product.image.url }}" alt="{{ product.name }}" class="product-image"/>
                         </div>
                         <div class="product-body">
                             <div class="product-category">

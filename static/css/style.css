@@ -581,40 +581,19 @@ button { cursor: pointer; font-family: inherit; border: none; outline: none; }
 .product-image {
     position: relative;
     height: 220px;
-    background: rgba(255, 255, 255, 0.03);
+    background: #f0f0f0;  /* رنگ پس‌زمینه برای عکس‌های خالی */
+    overflow: hidden;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 4rem;
-    color: var(--primary);
-    overflow: hidden;
 }
 
-.product-badge {
-    position: absolute;
-    top: 12px;
-    left: 12px;
-    background: var(--secondary);
-    color: #fff;
-    padding: 4px 14px;
-    border-radius: 50px;
-    font-size: 0.75rem;
-    font-weight: 600;
-}
-
-.product-rating {
-    position: absolute;
-    top: 12px;
-    right: 12px;
-    background: rgba(0, 0, 0, 0.7);
-    backdrop-filter: blur(8px);
-    padding: 4px 12px;
-    border-radius: 50px;
-    font-size: 0.8rem;
-    color: #ffd93d;
-    display: flex;
-    align-items: center;
-    gap: 4px;
+.product-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;  /* عکس رو کامل و با نسبت درست نشون میده */
+    display: block;
+    transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .product-body {
