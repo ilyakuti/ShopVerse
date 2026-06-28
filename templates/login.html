@@ -1,12 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    {% load static %}
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Login - ShopVerse</title>
     
-    <link rel="stylesheet" href="css/style.css" />
-    <link rel="stylesheet" href="css/login.css" />
+    <link rel="stylesheet" href="{% static 'css/style.css' %}" />
+    <link rel="stylesheet" href="{% static 'css/login.css' %}" />
     <link
         rel="stylesheet"
         href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
@@ -19,13 +20,13 @@
 <body>
     <nav class="navbar">
         <div class="nav-container">
-            <a href="index.html" class="nav-brand">
+            <a href="{% url "homepage_url" %}" class="nav-brand">
                 <i class="fas fa-store"></i>
                 <span>ShopVerse</span>
             </a>
 
             <div class="nav-actions">
-                <a href="login.html" class="nav-btn" id="loginBtn" title="Login">
+                <a href="{% url "login_url" %}" class="nav-btn" id="loginBtn" title="Login">
                     <i class="fas fa-user"></i>
                 </a>
                 <button class="nav-btn" id="themeToggle">
@@ -56,7 +57,7 @@
                             <i class="fas fa-envelope"></i>
                             <span>Email Address</span>
                         </label>
-                        <input type="email" id="loginEmail" placeholder="you@example.com" required />
+                        <input type="email" id="loginEmail" placeholder="you@example.com" name="email" required />
                     </div>
 
                     <div class="form-group">
@@ -65,7 +66,7 @@
                             <span>Password</span>
                         </label>
                         <div class="password-input">
-                            <input type="password" id="loginPassword" placeholder="Enter your password" required />
+                            <input type="password" id="loginPassword" placeholder="Enter your password" name="password" required />
                             <button type="button" class="toggle-password">
                                 <i class="fas fa-eye"></i>
                             </button>
@@ -112,7 +113,7 @@
                             <i class="fas fa-user"></i>
                             <span>Full Name</span>
                         </label>
-                        <input type="text" id="signupName" placeholder="John Doe" required />
+                        <input type="text" id="signupName" name="full_name" placeholder="John Doe" required />
                     </div>
 
                     <div class="form-group">
@@ -120,7 +121,7 @@
                             <i class="fas fa-envelope"></i>
                             <span>Email Address</span>
                         </label>
-                        <input type="email" id="signupEmail" placeholder="you@example.com" required />
+                        <input type="email" id="signupEmail" name="email" placeholder="you@example.com" required />
                     </div>
 
                     <div class="form-group">
@@ -129,7 +130,7 @@
                             <span>Password</span>
                         </label>
                         <div class="password-input">
-                            <input type="password" id="signupPassword" placeholder="Create a strong password" required />
+                            <input type="password" id="signupPassword" name="password" placeholder="Create a strong password" required />
                             <button type="button" class="toggle-password">
                                 <i class="fas fa-eye"></i>
                             </button>
@@ -141,7 +142,7 @@
                             <i class="fas fa-check-circle"></i>
                             <span>Confirm Password</span>
                         </label>
-                        <input type="password" id="signupConfirm" placeholder="Confirm your password" required />
+                        <input type="password" id="signupConfirm" name="confirm_password" placeholder="Confirm your password" required />
                     </div>
 
                     <div class="form-options">
@@ -178,7 +179,7 @@
 
             <div class="guest-access">
                 <span>or</span>
-                <a href="index.html" class="guest-link">
+                <a href="{% url "homepage_url" %}" class="guest-link">
                     <i class="fas fa-store"></i> Continue as Guest
                 </a>
             </div>
@@ -227,6 +228,6 @@
         </div>
     </footer>
 
-    <script src="js/login.js"></script>
+    <script src="{% static "js/login.js" %}"></script>
 </body>
 </html>

@@ -1,4 +1,6 @@
+from django.contrib.auth.models import AbstractUser, UserManager
 from django.db import models
+from django.utils.translation import gettext_lazy as _
 
 # Create your models here.
 
@@ -23,3 +25,10 @@ class ProductCategory(models.Model):
     name = models.CharField(max_length=64, null=True)
     def __str__(self):
         return self.name
+    
+class PersonalInformation(AbstractUser):
+    full_name = models.CharField(max_length=127, null=True)
+    email = models.EmailField(max_length=127, null=True)
+    password = models.CharField(max_length=127, null=True)
+    def __str__(self):
+        return self.full_name
