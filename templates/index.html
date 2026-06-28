@@ -25,8 +25,8 @@
                 <span>ShopVerse</span>
             </a>
 
-            <form class="nav-search" method="GET" name='q'>
-                <input type="text" name="search" placeholder="Search products..." />
+            <form class="nav-search" method="GET">
+                <input type="text" name="q" placeholder="Search products..." />
                 <button type="submit"><i class="fas fa-search"></i></button>
             </form>
 
@@ -102,22 +102,12 @@
         <div class="container">
             <h2><i class="fas fa-tags"></i> Categories</h2>
             <div class="category-filters">
-                <a href="index.html" class="category-btn active">All</a>
-                <a href="index.html?category=electronics" class="category-btn">
-                    <i class="fas fa-laptop"></i> Electronics
+                <a href="?" class="category-btn {% if not selected_category %}active{% endif %}">All</a>
+                {% for category in categories %}
+                <a href="?category={{ category.name|urlencode }}" class="category-btn {% if selected_category == category.name %}active{% endif %}">
+                    <i class="fas fa-tags"></i> {{ category.name }}
                 </a>
-                <a href="index.html?category=clothing" class="category-btn">
-                    <i class="fas fa-tshirt"></i> Clothing
-                </a>
-                <a href="index.html?category=books" class="category-btn">
-                    <i class="fas fa-book"></i> Books
-                </a>
-                <a href="index.html?category=home" class="category-btn">
-                    <i class="fas fa-couch"></i> Home & Living
-                </a>
-                <a href="index.html?category=toys" class="category-btn">
-                    <i class="fas fa-gamepad"></i> Toys
-                </a>
+                {% endfor %}
             </div>
         </div>
     </section>
@@ -128,30 +118,23 @@
             <div class="products-header">
                 <h2><i class="fas fa-grid-2"></i> All Products</h2>
                 <div class="sort-options">
-                    <form method="GET" action="index.html">
-                        <input type="hidden" name="category" />
-                        <input type="hidden" name="search" />
-                        <label for="sortSelect">Sort by:</label>
-                        <select id="sortSelect" name="sort" onchange="this.form.submit()">
-                            <option value="featured">Featured</option>
-                            <option value="price-low">Price: Low to High</option>
-                            <option value="price-high">Price: High to Low</option>
-                            <option value="rating">Top Rated</option>
-                        </select>
-                    </form>
                 </div>
             </div>
 
             <div class="product-grid">
                 <!-- Product 1 -->
-                 {% for product in product %}
+                 {% for product in products %}
                 <div class="product-card" data-id="1">
-                    <a href="product-detail.html?id=1" class="product-link">
+                    <a href="{% url "detail_page_url" product.id %}" class="product-link">
                         <div class="product-image">
                             <i class="fas fa-headphones"></i>
                         </div>
                         <div class="product-body">
-                            <div class="product-category"> {{ product.category }} </div>
+                            <div class="product-category">
+                                {% with product.product_category.all|first as first_category %}
+                                    {{ first_category.name }}
+                                {% endwith %}
+                            </div>
                             <div class="product-title"> {{ product.name }} </div>
                             {% if product.discount %}
                                 <div class="product-price"><span class="original-price">$ {{ product.discount }}</span> <span class="original">$ {{ product.price }}</span> </div>
@@ -257,6 +240,6 @@
         </div>
     </footer>
 
-    <script src="js/main.js"></script>
+    <script src="{% static "js/main.js" %}"></script>
 </body>
 </html>
