@@ -3,6 +3,7 @@ from django.shortcuts import render, redirect
 from .models import Product, ProductCategory, PersonalInformation
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.messages import error
+from django.contrib.auth.decorators import login_required
 
 # Create your views here.
 
@@ -63,3 +64,8 @@ def sign_up(request):
         pass
 
     return redirect("login_url")
+
+@login_required
+def logout_command(request):
+    logout(request)
+    return redirect('home_url')

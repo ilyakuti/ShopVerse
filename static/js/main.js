@@ -1,20 +1,15 @@
 // ========================================
-// MAIN.JS - Complete Logic
+// MAIN.JS
 // ========================================
 
-// ===== STATE =====
 let state = {
     cart: [],
     wishlist: [],
 };
 
-// ===== DOM ELEMENTS =====
 const themeToggle = document.getElementById('themeToggle');
 const userAvatarBtn = document.getElementById('userAvatarBtn');
 const userDropdown = document.getElementById('userDropdown');
-const loginBtn = document.getElementById('loginBtn');
-const userMenu = document.getElementById('userMenu');
-const logoutBtn = document.getElementById('logoutBtn');
 const cartToggle = document.getElementById('cartToggle');
 const cartSidebar = document.getElementById('cartSidebar');
 const cartOverlay = document.getElementById('cartOverlay');
@@ -49,59 +44,8 @@ function loadTheme() {
 }
 
 // ========================================
-// USER
+// USER DROPDOWN
 // ========================================
-
-function checkUserLogin() {
-    const userData = localStorage.getItem('userData');
-    if (userData) {
-        try {
-            const user = JSON.parse(userData);
-            showUserProfile(user);
-        } catch (e) {
-            showLoginButton();
-        }
-    } else {
-        showLoginButton();
-    }
-}
-
-function showUserProfile(user) {
-    loginBtn.style.display = 'none';
-    userMenu.style.display = 'flex';
-
-    const avatarUrl = user.avatar || `https://ui-avatars.com/api/?name=${encodeURIComponent(user.name)}&background=6c63ff&color=fff&size=128&bold=true`;
-    
-    const avatarImg = userMenu.querySelector('img');
-    if (avatarImg) avatarImg.src = avatarUrl;
-    
-    const nameSpan = document.getElementById('userNameDisplay');
-    if (nameSpan) nameSpan.textContent = user.name.split(' ')[0];
-    
-    const dropdownAvatar = document.querySelector('.dropdown-header img');
-    if (dropdownAvatar) dropdownAvatar.src = avatarUrl;
-    
-    const dropdownName = document.getElementById('dropdownName');
-    if (dropdownName) dropdownName.textContent = user.name;
-    
-    const dropdownEmail = document.getElementById('dropdownEmail');
-    if (dropdownEmail) dropdownEmail.textContent = user.email;
-}
-
-function showLoginButton() {
-    loginBtn.style.display = 'flex';
-    userMenu.style.display = 'none';
-}
-
-function logoutUser() {
-    localStorage.removeItem('userData');
-    localStorage.removeItem('userName');
-    localStorage.removeItem('userEmail');
-    localStorage.removeItem('rememberMe');
-    showLoginButton();
-    userDropdown.classList.remove('show');
-    userAvatarBtn.classList.remove('active');
-}
 
 function toggleDropdown(e) {
     if (e) e.stopPropagation();
@@ -316,19 +260,17 @@ function showToast(message, type = 'info') {
 // EVENT LISTENERS
 // ========================================
 
-// Theme
 themeToggle.addEventListener('click', toggleTheme);
 
-// User dropdown
 userAvatarBtn.addEventListener('click', toggleDropdown);
 
-// Logout
-logoutBtn.addEventListener('click', function(e) {
-    e.preventDefault();
-    logoutUser();
+document.addEventListener('click', function(e) {
+    if (!e.target.closest('.user-menu')) {
+        userDropdown.classList.remove('show');
+        userAvatarBtn.classList.remove('active');
+    }
 });
 
-// Add to Cart (Event Delegation)
 document.addEventListener('click', function(e) {
     const btn = e.target.closest('.btn-add');
     if (btn) {
@@ -337,7 +279,6 @@ document.addEventListener('click', function(e) {
     }
 });
 
-// Wishlist (Event Delegation)
 document.addEventListener('click', function(e) {
     const btn = e.target.closest('.btn-wishlist');
     if (btn) {
@@ -346,28 +287,18 @@ document.addEventListener('click', function(e) {
     }
 });
 
-// Cart
 cartToggle.addEventListener('click', openCart);
 closeCart.addEventListener('click', closeCartSidebar);
 cartOverlay.addEventListener('click', closeCartSidebar);
 
-// Checkout
 checkoutBtn.addEventListener('click', handleCheckout);
 closeModal.addEventListener('click', () => checkoutModal.classList.remove('active'));
 continueShopping.addEventListener('click', handleContinueShopping);
+
 checkoutModal.addEventListener('click', (e) => {
     if (e.target === checkoutModal) checkoutModal.classList.remove('active');
 });
 
-// Close dropdown on outside click
-document.addEventListener('click', function(e) {
-    if (!e.target.closest('.user-menu')) {
-        userDropdown.classList.remove('show');
-        userAvatarBtn.classList.remove('active');
-    }
-});
-
-// Keyboard shortcuts
 document.addEventListener('keydown', function(e) {
     if (e.key === 'Escape') {
         if (checkoutModal.classList.contains('active')) checkoutModal.classList.remove('active');
@@ -385,7 +316,6 @@ document.addEventListener('keydown', function(e) {
 
 document.addEventListener('DOMContentLoaded', function() {
     loadTheme();
-    checkUserLogin();
     renderCart();
     updateCartBadge();
 });
