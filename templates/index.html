@@ -33,22 +33,23 @@
 
             <div class="nav-actions">
                 <div class="user-profile">
-                    <!-- اگر کاربر لاگین کرده باشه، back-end این رو نشون میده -->
                      {% if user.is_authenticated %}
                     <div class="user-menu" id="userMenu">
+                        {% with user_name=user.full_name|default:user.username|default:user.email %}
                         <button class="user-avatar" id="userAvatarBtn">
-                            <img src="https://ui-avatars.com/api/?name=John+Doe&background=6c63ff&color=fff&size=128&bold=true" alt="User" />
-                            <span id="userNameDisplay">John</span>
+                            <img src="https://ui-avatars.com/api/?name={{ user_name|urlencode }}&background=6c63ff&color=fff&size=128&bold=true" alt="{{ user_name }}" />
+                            <span id="userNameDisplay">{{ user_name }}</span>
                             <i class="fas fa-chevron-down"></i>
                         </button>
                         <div class="user-dropdown" id="userDropdown">
                             <div class="dropdown-header">
-                                <img src="https://ui-avatars.com/api/?name=John+Doe&background=6c63ff&color=fff&size=128&bold=true" alt="User" />
+                                <img src="https://ui-avatars.com/api/?name={{ user_name|urlencode }}&background=6c63ff&color=fff&size=128&bold=true" alt="{{ user_name }}" />
                                 <div>
-                                    <div id="dropdownName">{{ user.get_full_name }}</div>
-                                    <div id="dropdownEmail">{{ user.email }}</div>
+                                    <div id="dropdownName">{{ user_name }}</div>
+                                    <div id="dropdownEmail">{{ user.email|default:user.username }}</div>
                                 </div>
                             </div>
+                        {% endwith %}
                             <a href="#" class="dropdown-item"><i class="fas fa-user"></i> My Profile</a>
                             <a href="#" class="dropdown-item"><i class="fas fa-shopping-bag"></i> My Orders</a>
                             <a href="#" class="dropdown-item"><i class="fas fa-heart"></i> Wishlist</a>

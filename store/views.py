@@ -2,7 +2,8 @@ import django
 from django.shortcuts import render, redirect
 from .models import Product, ProductCategory, PersonalInformation
 from django.contrib.auth import authenticate, login, logout
-from django.contrib.messages import error
+from django.contrib.auth.backends import ModelBackend
+from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 
 # Create your views here.
@@ -39,33 +40,50 @@ def login_page(request):
         email = request.POST.get("email")
         password = request.POST.get("password")
 
-        user = authenticate(request, username=email, password=password)
-        if user:
+        user = None
+        if email and password:
+            user = authenticate(request, username=email, password=password)
+
+        if user is not None:
             login(request, user)
             return redirect("homepage_url")
+        messages.error(request, "Invalid email or password")
+
     return render(request, "login.html")
+
 
 def sign_up(request):
     if request.method == "POST":
         email = request.POST.get("email")
         password = request.POST.get("password")
+        confirm_password = request.POST.get("confirm_password")
         full_name = request.POST.get("full_name")
-    try:
-        PersonalInformation.objects.create(email=email)
-        error(request, "username already taken")
-        return render (request, "login.html")
-    except PersonalInformation.DoesNotExist:
-        PersonalInformation.objects.create(email=email, password=password, full_name=full_name)
-        user = PersonalInformation.objects.create(email=email,
-                                                  password=password,
-                                                  full_name=full_name)
-        user.set_password(password)
-        user.save()
-        pass
+
+        if not email or not password:
+            messages.error(request, "Email and password are required")
+            return render(request, "login.html")
+
+        if password != confirm_password:
+            messages.error(request, "Passwords do not match")
+            return render(request, "login.html")
+
+        if PersonalInformation.objects.filter(email=email).exists():
+            messages.error(request, "This email is already registered")
+            return render(request, "login.html")
+
+        user = PersonalInformation.objects.create_user(
+            username=email,
+            email=email,
+            password=password,
+            full_name=full_name,
+        )
+        messages.success(request, "Account created successfully")
+        return redirect("login_url")
 
     return redirect("login_url")
 
+
 @login_required
-def logout_command(request):
+def logout_user(request):
     logout(request)
-    return redirect('home_url')
+    return redirect('homepage_url')
