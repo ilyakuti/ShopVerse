@@ -198,11 +198,9 @@ button { cursor: pointer; font-family: inherit; border: none; outline: none; }
 
 .user-menu {
     position: relative;
-    display: none;
+    display: flex;
     align-items: center;
 }
-
-.user-menu.show { display: flex; }
 
 .user-avatar {
     display: flex;
