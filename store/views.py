@@ -1,3 +1,5 @@
+import re
+
 import django
 from django.shortcuts import render, redirect
 from .models import Product, ProductCategory, PersonalInformation
@@ -80,7 +82,7 @@ def sign_up(request):
         messages.success(request, "Account created successfully")
         return redirect("login_url")
 
-    return redirect("login_url")
+    return render(request, "sign_up.html")
 
 
 @login_required

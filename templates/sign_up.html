@@ -4,7 +4,7 @@
     {% load static %}
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Sign In - ShopVerse</title>
+    <title>Sign Up - ShopVerse</title>
     
     <link rel="stylesheet" href="{% static 'css/style.css' %}" />
     <link rel="stylesheet" href="{% static 'css/login.css' %}" />
@@ -26,8 +26,8 @@
             </a>
 
             <div class="nav-actions">
-                <a href="{% url 'signup_url' %}" class="nav-btn" title="Sign Up">
-                    <i class="fas fa-user-plus"></i>
+                <a href="{% url 'login_url' %}" class="nav-btn" title="Sign In">
+                    <i class="fas fa-sign-in-alt"></i>
                 </a>
                 <button class="nav-btn" id="themeToggle">
                     <i class="fas fa-moon"></i>
@@ -47,12 +47,20 @@
     <section class="login-page">
         <div class="login-container">
             <div class="login-header">
-                <h2>Welcome Back!</h2>
-                <p class="subtitle">Sign in to continue shopping</p>
+                <h2>Create Account</h2>
+                <p class="subtitle">Join our community today</p>
             </div>
 
-            <form method="POST" action="{% url 'login_url' %}">
+            <form method="POST" action="{% url 'signup_url' %}">
                 {% csrf_token %}
+                <div class="form-group">
+                    <label>
+                        <i class="fas fa-user"></i>
+                        <span>Full Name</span>
+                    </label>
+                    <input type="text" name="full_name" placeholder="John Doe" required />
+                </div>
+
                 <div class="form-group">
                     <label>
                         <i class="fas fa-envelope"></i>
@@ -67,24 +75,34 @@
                         <span>Password</span>
                     </label>
                     <div class="password-input">
-                        <input type="password" name="password" placeholder="Enter your password" required />
+                        <input type="password" name="password" placeholder="Create a strong password" required />
                         <button type="button" class="toggle-password">
                             <i class="fas fa-eye"></i>
                         </button>
                     </div>
                 </div>
 
-                <div class="form-options">
-                    <label class="checkbox-label">
-                        <input type="checkbox" name="remember_me" />
-                        <span class="checkmark"></span>
-                        Remember me
+                <div class="form-group">
+                    <label>
+                        <i class="fas fa-check-circle"></i>
+                        <span>Confirm Password</span>
                     </label>
-                    <a href="" class="forgot-link">Forgot Password?</a>
+                    <input type="password" name="confirm_password" placeholder="Confirm your password" required />
                 </div>
 
-                <button type="submit" class="btn-login">
-                    <i class="fas fa-sign-in-alt"></i> Sign In
+                <div class="form-options">
+                    <label class="checkbox-label">
+                        <input type="checkbox" name="terms_agreed" required />
+                        <span class="checkmark"></span>
+                        I agree to the
+                        <a href="#" class="terms-link">Terms of Service</a>
+                        and
+                        <a href="#" class="terms-link">Privacy Policy</a>
+                    </label>
+                </div>
+
+                <button type="submit" class="btn-login btn-signup">
+                    <i class="fas fa-user-plus"></i> Create Account
                 </button>
 
                 <div class="social-login">
@@ -104,7 +122,7 @@
             </form>
 
             <div class="auth-footer">
-                <p>Don't have an account? <a href="{% url 'signup_url' %}">Sign Up</a></p>
+                <p>Already have an account? <a href="{% url 'login_url' %}">Sign In</a></p>
                 <a href="{% url 'homepage_url' %}" class="guest-link">
                     <i class="fas fa-store"></i> Continue as Guest
                 </a>
