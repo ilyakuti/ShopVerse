@@ -25,40 +25,46 @@
                 <span>ShopVerse</span>
             </a>
 
-            <form class="nav-search" method="GET" action="index.html">
-                <input type="text" name="search" placeholder="Search products..." />
+            <form class="nav-search" method="GET">
+                <input type="text" name="q" placeholder="Search products..." />
                 <button type="submit"><i class="fas fa-search"></i></button>
             </form>
 
             <div class="nav-actions">
                 <div class="user-profile">
+                     {% if user.is_authenticated %}
                     <div class="user-menu" id="userMenu">
+                        {% with user_name=user.full_name|default:user.username|default:user.email %}
                         <button class="user-avatar" id="userAvatarBtn">
-                            <img src="https://ui-avatars.com/api/?name=John+Doe&background=6c63ff&color=fff&size=128&bold=true" alt="User" />
-                            <span id="userNameDisplay">John</span>
+                            <img src="https://ui-avatars.com/api/?name={{ user_name|urlencode }}&background=6c63ff&color=fff&size=128&bold=true" alt="{{ user_name }}" />
+                            <span id="userNameDisplay">{{ user_name }}</span>
                             <i class="fas fa-chevron-down"></i>
                         </button>
                         <div class="user-dropdown" id="userDropdown">
                             <div class="dropdown-header">
-                                <img src="https://ui-avatars.com/api/?name=John+Doe&background=6c63ff&color=fff&size=128&bold=true" alt="User" />
+                                <img src="https://ui-avatars.com/api/?name={{ user_name|urlencode }}&background=6c63ff&color=fff&size=128&bold=true" alt="{{ user_name }}" />
                                 <div>
-                                    <div id="dropdownName">John Doe</div>
-                                    <div id="dropdownEmail">john@email.com</div>
+                                    <div id="dropdownName">{{ user_name }}</div>
+                                    <div id="dropdownEmail">{{ user.email|default:user.username }}</div>
                                 </div>
                             </div>
+                        {% endwith %}
                             <a href="#" class="dropdown-item"><i class="fas fa-user"></i> My Profile</a>
                             <a href="#" class="dropdown-item"><i class="fas fa-shopping-bag"></i> My Orders</a>
                             <a href="#" class="dropdown-item"><i class="fas fa-heart"></i> Wishlist</a>
                             <a href="#" class="dropdown-item"><i class="fas fa-cog"></i> Settings</a>
                             <hr />
-                            <a href="#" class="dropdown-item logout" id="logoutBtn">
+                            <a href="{% url 'logout_url' %}" class="dropdown-item logout">
                                 <i class="fas fa-sign-out-alt"></i> Logout
                             </a>
                         </div>
                     </div>
-                    <a href="login.html" class="nav-btn" id="loginBtn" title="Login">
+                    
+                    {% else %}
+                    <a href="{% url 'login_url' %}" class="nav-btn" id="loginBtn" title="Login">
                         <i class="fas fa-user"></i>
                     </a>
+                    {% endif %}
                 </div>
 
                 <button class="nav-btn" id="cartToggle">
@@ -71,7 +77,6 @@
             </div>
         </div>
     </nav>
-
     <!-- ===== PRODUCT DETAIL ===== -->
     <section class="detail-page">
         <div class="container">
@@ -265,6 +270,6 @@
         </div>
     </footer>
 
-    <script src="js/detail.js"></script>
+    <script src="{% static "js/detail.js" %}"></script>
 </body>
 </html>
